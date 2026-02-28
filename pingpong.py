@@ -12,12 +12,6 @@ lose = font1.render("YOU LOSE!", True, (180, 0, 0))
 
 font2  = font.SysFont("Arial", 36)
 
-mixer.init()
-mixer.music.load('space.ogg')
-mixer.music.play()
-
-fire_sound = mixer.Sound("fire.ogg")
-
 class GameSprite(sprite.Sprite):
     def __init__(self, image_path, player_x, player_y, size_x, size_y, speed):
         super().__init__()
@@ -39,7 +33,9 @@ class Player(GameSprite):
             self.rect.y += self.speed
 
 class Ball(GameSprite):
-    
+
+
+
 win_width = 700
 win_height = 500
 
