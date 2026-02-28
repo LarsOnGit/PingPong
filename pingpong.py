@@ -1,14 +1,12 @@
 from pygame import *
 from random import randint
 
-
 # Das ist ein Konflikt
 
 font.init()
 font1 = font.SysFont("Arial", 80)
 win = font1.render("YOU WIN!", True, (255, 255, 255))
 lose = font1.render("YOU LOSE!", True, (180, 0, 0))
-
 
 font2  = font.SysFont("Arial", 36)
 
@@ -33,8 +31,8 @@ class Player(GameSprite):
             self.rect.y += self.speed
 
 class Ball(GameSprite):
-
-
+    def __init__():
+        super().__init__(self, image_path, player_x, player_y, size_x, size_y, speed)
 
 win_width = 700
 win_height = 500
