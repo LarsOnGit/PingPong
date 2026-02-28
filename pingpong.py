@@ -33,38 +33,13 @@ class GameSprite(sprite.Sprite):
 class Player(GameSprite):
     def update(self):
         keys = key.get_pressed()
-        if keys[K_LEFT] and self.rect.x > 5:
-            self.rect.x -= self.speed
-        if keys[K_RIGHT] and self.rect.x < win_width - 5:
-            self.rect.x += self.speed
+        if keys[K_UP] and self.rect.x > 5:
+            self.rect.y -= self.speed
+        if keys[K_DOWN] and self.rect.x < win_width - 5:
+            self.rect.y += self.speed
+
+class Ball(GameSprite):
     
-    def fire(self):
-        bullet = Bullet("bullet.png",self.rect.x + 40 , win_height - 100, 15, 20, 15)
-        bullets.add(bullet)
-
-class Enemy(GameSprite):
-    def update(self):
-        self.rect.y += self.speed
-        if self.rect.y > win_height:
-            self.rect.x = randint(0, win_width - 80)
-            self.rect.y = -40
-            self.speed = int(self.speed* randint(8,13)/10)
-            global lost
-            lost += 1
-
-
-
-
-class Bullet(GameSprite):
-
-    def update(self):
-        self.rect.y -= self.speed
-        if self.rect.y < 0:
-            self.kill()
-
-
-
-
 win_width = 700
 win_height = 500
 
