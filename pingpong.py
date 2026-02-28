@@ -42,18 +42,6 @@ class Player(GameSprite):
         bullet = Bullet("bullet.png",self.rect.x + 40 , win_height - 100, 15, 20, 15)
         bullets.add(bullet)
 
-class Enemy(GameSprite):
-    def update(self):
-        self.rect.y += self.speed
-        if self.rect.y > win_height:
-            self.rect.x = randint(0, win_width - 80)
-            self.rect.y = -40
-            self.speed = int(self.speed* randint(8,13)/10)
-            global lost
-            lost += 1
-
-
-
 
 class Bullet(GameSprite):
 
