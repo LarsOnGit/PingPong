@@ -13,8 +13,8 @@ lose = font1.render("YOU LOSE!", True, (180, 0, 0))
 font2  = font.SysFont("Arial", 36)
 
 mixer.init()
-mixer.music.load('space.ogg')
-mixer.music.play()
+# mixer.music.load('space.ogg')
+# mixer.music.play()
 
 fire_sound = mixer.Sound("fire.ogg")
 
@@ -42,7 +42,6 @@ class Player(GameSprite):
         bullet = Bullet("bullet.png",self.rect.x + 40 , win_height - 100, 15, 20, 15)
         bullets.add(bullet)
 
-
 class Bullet(GameSprite):
 
     def update(self):
@@ -62,7 +61,8 @@ window = display.set_mode((win_width, win_height))
 bg_im = image.load("galaxy.jpg")
 background = transform.scale(bg_im, (win_width, win_height))
 
-player = Player("rocket.png", 300, win_height - 100 , 80, 100, 10)
+player_left = Player("paddle.png", 50, win_height - 100 , 80, 100, 10)
+player_right = Player("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
 monsters = sprite.Group()
 for i in range(5):
     monster = Enemy("ufo.png", randint(0, win_width - 80), -40, 80, 50, randint(1,5))
