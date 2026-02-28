@@ -95,44 +95,8 @@ while run:
     for e in event.get():
         if e.type == QUIT:
             run = False
-        if e.type == KEYDOWN:
-            if e.key == K_SPACE:
-                player.fire()
-                fire_sound.play()
     if not finish:
         window.blit(background, (0,0))
-
-        player.update()
-        player.draw()
-
-        monsters.update()
-        monsters.draw(window)
-
-        bullets.update()
-        bullets.draw(window)
-
-        collide = sprite.groupcollide(monsters, bullets, True, True)
-        if collide:
-            score = score + 1
-            monster = Enemy("ufo.png", randint(0, win_width - 80), -40, 80, 50, randint(1,5))
-            monsters.add(monster)
-
-        text_lose = font2.render("Missed: " + str(lost), 1, (255, 255,255))
-        text_score = font2.render("Score: " + str(score), 1, (255, 255,255))
-        window.blit(text_lose, (10, 50))
-        window.blit(text_score, (10, 20))
-
-        if lost >= max_lost:
-            window.blit(lose, (200, 200))
-            finish = True
-
-        if sprite.spritecollide(player, monsters, False):
-            window.blit(lose, (200, 200))
-            finish = True
-
-        if score >= goal:
-            window.blit(win, (200, 200))
-            finish = True
 
     display.update()
     clock.tick(FPS)
