@@ -13,8 +13,8 @@ lose = font1.render("YOU LOSE!", True, (180, 0, 0))
 font2  = font.SysFont("Arial", 36)
 
 mixer.init()
-mixer.music.load('space.ogg')
-mixer.music.play()
+# mixer.music.load('space.ogg')
+# mixer.music.play()
 
 fire_sound = mixer.Sound("fire.ogg")
 
@@ -54,8 +54,8 @@ window = display.set_mode((win_width, win_height))
 
 bg_im = image.load("galaxy.jpg")
 background = transform.scale(bg_im, (win_width, win_height))
-p1 = Player1("rocket.png", 10, win_height - 100 , 80, 100, 10)
-p2 = Player2("rocket.png", win_width - 80, win_height - 100 , 80, 100, 10)
+player_left = Player1("paddle.png", 50, win_height - 100 , 80, 100, 10)
+player_right = Player2("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
 monsters = sprite.Group()
 for i in range(5):
     monster = Enemy("ufo.png", randint(0, win_width - 80), -40, 80, 50, randint(1,5))
