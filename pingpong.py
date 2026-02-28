@@ -30,40 +30,21 @@ class GameSprite(sprite.Sprite):
     def draw(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-class Player(GameSprite):
+class Player1(GameSprite):
     def update(self):
         keys = key.get_pressed()
-        if keys[K_LEFT] and self.rect.x > 5:
-            self.rect.x -= self.speed
-        if keys[K_RIGHT] and self.rect.x < win_width - 5:
-            self.rect.x += self.speed
-    
-    def fire(self):
-        bullet = Bullet("bullet.png",self.rect.x + 40 , win_height - 100, 15, 20, 15)
-        bullets.add(bullet)
+        if keys[K_UP] and self.rect.y > 5:
+            self.rect.y += self.speed
+        if keys[K_DOWN] and self.rect.y < win_height - 5:
+            self.rect.y -= self.speed
 
-class Enemy(GameSprite):
+class Player2(GameSprite):
     def update(self):
-        self.rect.y += self.speed
-        if self.rect.y > win_height:
-            self.rect.x = randint(0, win_width - 80)
-            self.rect.y = -40
-            self.speed = int(self.speed* randint(8,13)/10)
-            global lost
-            lost += 1
-
-
-
-
-class Bullet(GameSprite):
-
-    def update(self):
-        self.rect.y -= self.speed
-        if self.rect.y < 0:
-            self.kill()
-
-
-
+        keys = key.get_pressed()
+        if keys[K_w] and self.rect.y > 5:
+            self.rect.y += self.speed
+        if keys[K_s] and self.rect.y < win_height - 5:
+            self.rect.y -= self.speed
 
 win_width = 700
 win_height = 500
@@ -73,8 +54,8 @@ window = display.set_mode((win_width, win_height))
 
 bg_im = image.load("galaxy.jpg")
 background = transform.scale(bg_im, (win_width, win_height))
-
-player = Player("rocket.png", 300, win_height - 100 , 80, 100, 10)
+p1 = Player1("rocket.png", 10, win_height - 100 , 80, 100, 10)
+p2 = Player2("rocket.png", win_width - 80, win_height - 100 , 80, 100, 10)
 monsters = sprite.Group()
 for i in range(5):
     monster = Enemy("ufo.png", randint(0, win_width - 80), -40, 80, 50, randint(1,5))
@@ -98,5 +79,8 @@ while run:
     if not finish:
         window.blit(background, (0,0))
 
+        p1.draw()
+        p2.draw()
+        
     display.update()
     clock.tick(FPS)
