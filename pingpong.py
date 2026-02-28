@@ -30,27 +30,21 @@ class GameSprite(sprite.Sprite):
     def draw(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-class Player(GameSprite):
+class Player1(GameSprite):
     def update(self):
         keys = key.get_pressed()
-        if keys[K_LEFT] and self.rect.x > 5:
-            self.rect.x -= self.speed
-        if keys[K_RIGHT] and self.rect.x < win_width - 5:
-            self.rect.x += self.speed
-    
-    def fire(self):
-        bullet = Bullet("bullet.png",self.rect.x + 40 , win_height - 100, 15, 20, 15)
-        bullets.add(bullet)
+        if keys[K_UP] and self.rect.y > 5:
+            self.rect.y += self.speed
+        if keys[K_DOWN] and self.rect.y < win_height - 5:
+            self.rect.y -= self.speed
 
-class Bullet(GameSprite):
-
+class Player2(GameSprite):
     def update(self):
-        self.rect.y -= self.speed
-        if self.rect.y < 0:
-            self.kill()
-
-
-
+        keys = key.get_pressed()
+        if keys[K_w] and self.rect.y > 5:
+            self.rect.y += self.speed
+        if keys[K_s] and self.rect.y < win_height - 5:
+            self.rect.y -= self.speed
 
 win_width = 700
 win_height = 500
@@ -58,11 +52,18 @@ win_height = 500
 display.set_caption("Shooter")
 window = display.set_mode((win_width, win_height))
 
+<<<<<<< HEAD
 # bg_im = image.load("galaxy.jpg")
 # background = transform.scale(bg_im, (win_width, win_height))
 
 player_left = Player("paddle.png", 50, win_height - 100 , 80, 100, 10)
 player_right = Player("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
+=======
+bg_im = image.load("galaxy.jpg")
+background = transform.scale(bg_im, (win_width, win_height))
+player_left = Player1("paddle.png", 50, win_height - 100 , 80, 100, 10)
+player_right = Player2("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
+>>>>>>> 024e79ab2709d69179ec164d88a45fa45335c03b
 monsters = sprite.Group()
 bullets = sprite.Group()
 
@@ -82,5 +83,13 @@ finish = False
 #     if not finish:
 #         window.blit(background, (0,0))
 
+<<<<<<< HEAD
 #    display.update()
 #    clock.tick(FPS)
+=======
+        p1.draw()
+        p2.draw()
+        
+    display.update()
+    clock.tick(FPS)
+>>>>>>> 024e79ab2709d69179ec164d88a45fa45335c03b
