@@ -1,6 +1,7 @@
 from pygame import *
 from random import randint
 
+
 # Das ist ein Konflikt
 
 font.init()
@@ -31,8 +32,18 @@ class Player1(GameSprite):
             self.rect.y += self.speed
 
 class Ball(GameSprite):
-    def __init__():
-        super().__init__(self, image_path, player_x, player_y, size_x, size_y, speed)
+    def __init__(self, image_path, player_x, player_y, size_x, size_y, speed):
+        super().__init__(image_path, player_x, player_y, size_x, size_y, speed)
+        self.speed_x = speed
+        self.speed_y = speed
+
+    def update(self):
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
+
+    def check_wall_collision(self):
+        if self.rect.y <= 0 or self.rect.y >= win_height - self.rect.height:
+            self.speed_y = -self.speed_y
 
 win_width = 700
 win_height = 500
@@ -60,9 +71,9 @@ finish = False
 while run: 
     for e in event.get():
         if e.type == QUIT:
-            run = False
-    if not finish:
-        window.blit(background, (0,0))
+             run = False
+        if not finish:
+            window.blit(background, (0,0))
 
     display.update()
     clock.tick(FPS)
