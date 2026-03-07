@@ -54,8 +54,8 @@ window = display.set_mode((win_width, win_height))
 bg_im = image.load("background.jpg")
 background = transform.scale(bg_im, (win_width, win_height))
 
-player_left = Player1("paddle.png", 50, win_height - 100 , 80, 100, 10)
-player_right = Player1("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
+#player_left = Player1("paddle.png", 50, win_height - 100 , 80, 100, 10)
+#player_right = Player1("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
 monsters = sprite.Group()
 bullets = sprite.Group()
 
