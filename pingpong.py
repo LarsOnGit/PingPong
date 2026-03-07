@@ -23,12 +23,17 @@ class GameSprite(sprite.Sprite):
     def draw(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-class Player1(GameSprite):
+class Player(GameSprite):
+    def __init__(self, x, y, up_key, down_key):
+        super("paddle.png",x , y , 50, 150, 4)
+        self.up_key = up_key
+        self.down_key = down_key
+
     def update(self):
         keys = key.get_pressed()
-        if keys[K_UP] and self.rect.x > 5:
+        if keys[self.up_key] and self.rect.x > 5:
             self.rect.y -= self.speed
-        if keys[K_DOWN] and self.rect.x < win_width - 5:
+        if keys[self.down_key] and self.rect.x < win_width - 5:
             self.rect.y += self.speed
 
 class Ball(GameSprite):
