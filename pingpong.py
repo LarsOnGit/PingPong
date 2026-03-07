@@ -25,7 +25,7 @@ class GameSprite(sprite.Sprite):
 
 class Player(GameSprite):
     def __init__(self, x, y, up_key, down_key):
-        super("paddle.png",x , y , 50, 150, 4)
+        super().__init__("ping_pong_ball.png", x, y, 50, 150, 4)
         self.up_key = up_key
         self.down_key = down_key
 
@@ -59,12 +59,13 @@ window = display.set_mode((win_width, win_height))
 bg_im = image.load("background.jpg")
 background = transform.scale(bg_im, (win_width, win_height))
 
-#player_left = Player1("paddle.png", 50, win_height - 100 , 80, 100, 10)
-#player_right = Player1("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
+player_left = Player(50, win_height//2 - 75, K_UP, K_DOWN)
+player_right = Player(win_width - 100, win_height//2 - 75, K_w, K_s)
 
 run = True
 FPS = 20
 clock = time.Clock()
+finish = False
 
 while run: 
     for e in event.get():
@@ -72,6 +73,10 @@ while run:
              run = False
         if not finish:
             window.blit(background, (0,0))
+            player_left.update()
+            player_right.update()
+            player_left.draw()
+            player_right.draw()
 
     display.update()
     clock.tick(FPS)
