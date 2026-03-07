@@ -25,15 +25,15 @@ class GameSprite(sprite.Sprite):
 
 class Player(GameSprite):
     def __init__(self, x, y, up_key, down_key):
-        super().__init__("paddle.png", x, y, 50, 150, 4)
+        super().__init__("paddle.png", x, y, 75, 250, 5)
         self.up_key = up_key
         self.down_key = down_key
 
     def update(self):
         keys = key.get_pressed()
-        if keys[self.up_key] and self.rect.x > 5:
+        if keys[self.up_key] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys[self.down_key] and self.rect.x < win_width - 5:
+        if keys[self.down_key] and self.rect.y < win_height - self.rect.height - 5:
             self.rect.y += self.speed
 
 class Ball(GameSprite):
@@ -52,7 +52,7 @@ class Ball(GameSprite):
 
 win_width = 700
 win_height = 500
-
+ 
 display.set_caption("Shooter")
 window = display.set_mode((win_width, win_height))
 
@@ -68,7 +68,7 @@ goal = 10
 lost  = 0
 max_lost = 3
 run = True
-FPS = 30
+FPS = 60
 clock = time.Clock()
 finish = False
 
@@ -76,16 +76,17 @@ while run:
     for e in event.get():
         if e.type == QUIT:
              run = False
-        if not finish:
-            window.blit(background, (0,0))
-            player_left.update()
-            player_right.update()
-            player_left.draw()
-            player_right.draw()
+    
+    if not finish:
+        window.blit(background, (0,0))
+        player_left.update()
+        player_right.update()
+        player_left.draw()
+        player_right.draw()
 
-            ball.update()
-            ball.check_wall_collision()
-            ball.draw()
+        ball.update()
+        ball.check_wall_collision()
+        ball.draw()
 
     display.update()
     clock.tick(FPS)
