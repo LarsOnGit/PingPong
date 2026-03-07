@@ -1,6 +1,7 @@
 from pygame import *
 from random import randint
 
+
 # Das ist ein Konflikt
 
 font.init()
@@ -60,9 +61,9 @@ finish = False
 while run: 
     for e in event.get():
         if e.type == QUIT:
-            run = False
-    if not finish:
-        window.blit(background, (0,0))
+             run = False
+        if not finish:
+            window.blit(background, (0,0))
 
     display.update()
     clock.tick(FPS)
