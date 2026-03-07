@@ -25,7 +25,7 @@ class GameSprite(sprite.Sprite):
 
 class Player(GameSprite):
     def __init__(self, x, y, up_key, down_key):
-        super().__init__("ping_pong_ball.png", x, y, 50, 150, 5)
+        super().__init__("paddle.png", x, y, 75, 250, 5)
         self.up_key = up_key
         self.down_key = down_key
 
