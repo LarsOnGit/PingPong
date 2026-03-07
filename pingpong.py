@@ -1,7 +1,6 @@
 from pygame import *
 from random import randint
 
-
 # Das ist ein Konflikt
 
 font.init()
@@ -9,14 +8,7 @@ font1 = font.SysFont("Arial", 80)
 win = font1.render("YOU WIN!", True, (255, 255, 255))
 lose = font1.render("YOU LOSE!", True, (180, 0, 0))
 
-
 font2  = font.SysFont("Arial", 36)
-
-mixer.init()
-# mixer.music.load('space.ogg')
-# mixer.music.play()
-
-# fire_sound = mixer.Sound("fire.ogg")
 
 class GameSprite(sprite.Sprite):
     def __init__(self, image_path, player_x, player_y, size_x, size_y, speed):
@@ -33,18 +25,14 @@ class GameSprite(sprite.Sprite):
 class Player1(GameSprite):
     def update(self):
         keys = key.get_pressed()
-        if keys[K_UP] and self.rect.y > 5:
-            self.rect.y += self.speed
-        if keys[K_DOWN] and self.rect.y < win_height - 5:
+        if keys[K_UP] and self.rect.x > 5:
             self.rect.y -= self.speed
+        if keys[K_DOWN] and self.rect.x < win_width - 5:
+            self.rect.y += self.speed
 
-class Player2(GameSprite):
-    def update(self):
-        keys = key.get_pressed()
-        if keys[K_w] and self.rect.y > 5:
-            self.rect.y += self.speed
-        if keys[K_s] and self.rect.y < win_height - 5:
-            self.rect.y -= self.speed
+class Ball(GameSprite):
+    def __init__():
+        super().__init__(self, image_path, player_x, player_y, size_x, size_y, speed)
 
 win_width = 700
 win_height = 500
@@ -52,18 +40,11 @@ win_height = 500
 display.set_caption("Shooter")
 window = display.set_mode((win_width, win_height))
 
-<<<<<<< HEAD
 # bg_im = image.load("galaxy.jpg")
 # background = transform.scale(bg_im, (win_width, win_height))
 
-player_left = Player("paddle.png", 50, win_height - 100 , 80, 100, 10)
+player_left = Player("paddle.png", 5    0, win_height - 100 , 80, 100, 10)
 player_right = Player("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
-=======
-bg_im = image.load("galaxy.jpg")
-background = transform.scale(bg_im, (win_width, win_height))
-player_left = Player1("paddle.png", 50, win_height - 100 , 80, 100, 10)
-player_right = Player2("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
->>>>>>> 024e79ab2709d69179ec164d88a45fa45335c03b
 monsters = sprite.Group()
 bullets = sprite.Group()
 
@@ -83,13 +64,5 @@ finish = False
 #     if not finish:
 #         window.blit(background, (0,0))
 
-<<<<<<< HEAD
 #    display.update()
 #    clock.tick(FPS)
-=======
-        p1.draw()
-        p2.draw()
-        
-    display.update()
-    clock.tick(FPS)
->>>>>>> 024e79ab2709d69179ec164d88a45fa45335c03b
