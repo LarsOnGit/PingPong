@@ -72,9 +72,9 @@ window = display.set_mode((win_width, win_height))
 bg_im = image.load("background.jpg")
 background = transform.scale(bg_im, (win_width, win_height))
 
-player_left = Player(50, win_height//2 - 75, K_UP, K_DOWN)
-player_right = Player(win_width - 100, win_height//2 - 75, K_w, K_s)
-ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 20, 20, 3)   
+player_left = Player(50, win_height//2 - 75, K_w, K_s)
+player_right = Player(win_width - 100, win_height//2 - 75, K_UP, K_DOWN)
+ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 20, 20, 5)   
 
 score = 0
 goal = 10
