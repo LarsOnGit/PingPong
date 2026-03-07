@@ -40,7 +40,7 @@ class Ball(GameSprite):
     def __init__(self, image_path, player_x, player_y, size_x, size_y, speed):
         super().__init__(image_path, player_x, player_y, size_x, size_y, speed)
         self.speed_x = speed
-        self.speed_y = speed
+        self.speed_y = 0
 
     def update(self):
         self.rect.x += self.speed_x
@@ -49,6 +49,19 @@ class Ball(GameSprite):
     def check_wall_collision(self):
         if self.rect.y <= 0 or self.rect.y >= win_height - self.rect.height:
             self.speed_y = -self.speed_y
+    
+    def check_paddle_collision(self, paddle_left, paddle_right):
+        if sprite.collide_rect(self, paddle_left):
+            if self.speed_x < 0: 
+                self.speed_x = -self.speed_x
+                hit_pos = (self.rect.centery - paddle_left.rect.centery) / (paddle_left.rect.height / 2)
+                self.speed_y = hit_pos * 8
+        
+        if sprite.collide_rect(self, paddle_right):
+            if self.speed_x > 0:  
+                self.speed_x = -self.speed_x
+                hit_pos = (self.rect.centery - paddle_right.rect.centery) / (paddle_right.rect.height / 2)
+                self.speed_y = hit_pos * 8
 
 win_width = 700
 win_height = 500
@@ -61,7 +74,7 @@ background = transform.scale(bg_im, (win_width, win_height))
 
 player_left = Player(50, win_height//2 - 75, K_UP, K_DOWN)
 player_right = Player(win_width - 100, win_height//2 - 75, K_w, K_s)
-ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 20, 20, 5)   
+ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 20, 20, 3)   
 
 score = 0
 goal = 10
@@ -86,6 +99,7 @@ while run:
 
         ball.update()
         ball.check_wall_collision()
+        ball.check_paddle_collision(player_left, player_right)
         ball.draw()
 
     display.update()
