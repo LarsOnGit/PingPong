@@ -52,7 +52,7 @@ class Ball(GameSprite):
 
 win_width = 700
 win_height = 500
-
+ 
 display.set_caption("Shooter")
 window = display.set_mode((win_width, win_height))
 
