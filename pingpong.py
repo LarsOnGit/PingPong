@@ -40,11 +40,11 @@ win_height = 500
 display.set_caption("Shooter")
 window = display.set_mode((win_width, win_height))
 
-# bg_im = image.load("galaxy.jpg")
-# background = transform.scale(bg_im, (win_width, win_height))
+bg_im = image.load("background.jpg")
+background = transform.scale(bg_im, (win_width, win_height))
 
-player_left = Player("paddle.png", 5    0, win_height - 100 , 80, 100, 10)
-player_right = Player("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
+player_left = Player1("paddle.png", 50, win_height - 100 , 80, 100, 10)
+player_right = Player1("paddle.png", win_width - 130, win_height - 100 , 80, 100, 10)
 monsters = sprite.Group()
 bullets = sprite.Group()
 
@@ -57,12 +57,12 @@ FPS = 20
 clock = time.Clock()
 finish = False
 
-# while run: 
-#     for e in event.get():
-#         if e.type == QUIT:
-#             run = False
-#     if not finish:
-#         window.blit(background, (0,0))
+while run: 
+    for e in event.get():
+        if e.type == QUIT:
+            run = False
+    if not finish:
+        window.blit(background, (0,0))
 
-#    display.update()
-#    clock.tick(FPS)
+    display.update()
+    clock.tick(FPS)
