@@ -25,7 +25,7 @@ class GameSprite(sprite.Sprite):
 
 class Player(GameSprite):
     def __init__(self, x, y, up_key, down_key):
-        super().__init__("ping_pong_ball.png", x, y, 50, 150, 4)
+        super().__init__("paddle.png", x, y, 50, 150, 4)
         self.up_key = up_key
         self.down_key = down_key
 
@@ -61,9 +61,14 @@ background = transform.scale(bg_im, (win_width, win_height))
 
 player_left = Player(50, win_height//2 - 75, K_UP, K_DOWN)
 player_right = Player(win_width - 100, win_height//2 - 75, K_w, K_s)
+ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 20, 20, 5)   
 
+score = 0
+goal = 10
+lost  = 0
+max_lost = 3
 run = True
-FPS = 20
+FPS = 30
 clock = time.Clock()
 finish = False
 
@@ -77,6 +82,10 @@ while run:
             player_right.update()
             player_left.draw()
             player_right.draw()
+
+            ball.update()
+            ball.check_wall_collision()
+            ball.draw()
 
     display.update()
     clock.tick(FPS)
