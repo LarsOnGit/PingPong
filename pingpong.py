@@ -75,11 +75,6 @@ class Ball(GameSprite):
                 self.speed_x = -self.speed_x
                 hit_pos = (self.rect.centery - paddle_right.rect.centery) / (paddle_right.rect.height / 2)
                 self.speed_y = hit_pos * 8
-    def win_con(self):
-        if self.rect.x < 0:
-            p2_point_int += 1
-        elif self.rect.x > win_width:
-            p1_point_int += 1
         
 
 win_width = 700
@@ -98,8 +93,8 @@ player_left = Player(50, win_height//2 - 75, K_w, K_s)
 player_right = Player(win_width - 100, win_height//2 - 75, K_UP, K_DOWN)
 ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 25, 25, 5)  
 
-p1_points = font1.render(str(pleft_points), True, (255, 255, 255))
-p2_points = font1.render(str(pright_points), True, (255, 255, 255))
+p1_points = font1.render(str(pleft_points), True, (0, 0, 0))
+p2_points = font1.render(str(pright_points), True, (0, 0, 0))
 
 
 
