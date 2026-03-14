@@ -49,7 +49,17 @@ class Ball(GameSprite):
     def check_wall_collision(self):
         if self.rect.y <= 0 or self.rect.y >= win_height - self.rect.height:
             self.speed_y = -self.speed_y
-    
+
+    def check_goal(self, pleft_points, pright_points):
+        if self.rect.x <= 0 or self.rect.x >= win_width - self.rect.width:
+            if self.rect.x <= 0:
+                pright_points += 1
+            if self.rect.x >= win_width - self.rect.width:
+                pleft_points += 1
+            self.rect.x = win_width // 2
+            self.rect.y = win_height // 2
+            self.speed_x = -self.speed_x
+        
     def check_paddle_collision(self, paddle_left, paddle_right):
         if sprite.collide_rect(self, paddle_left):
             if self.speed_x < 0: 
@@ -65,6 +75,9 @@ class Ball(GameSprite):
 
 win_width = 700
 win_height = 500
+
+pleft_points = 0
+pright_points = 0
  
 display.set_caption("PingPong")
 window = display.set_mode((win_width, win_height))
@@ -74,12 +87,11 @@ background = transform.scale(bg_im, (win_width, win_height))
 
 player_left = Player(50, win_height//2 - 75, K_w, K_s)
 player_right = Player(win_width - 100, win_height//2 - 75, K_UP, K_DOWN)
-ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 25, 25, 5)   
+ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 25, 25, 5)  
 
-score = 0
-goal = 10
-lost  = 0
-max_lost = 3
+p1_points = font1.render(str(pleft_points), True, (255, 255, 255))
+p2_points = font1.render(str(pright_points), True, (255, 255, 255))
+
 run = True
 FPS = 60
 clock = time.Clock()
@@ -96,10 +108,12 @@ while run:
         player_right.update()
         player_left.draw()
         player_right.draw()
-
+        window.blit(p1_points, (100, 50))
+        window.blit(p2_points, (win_width - 100, 50))
         ball.update()
         ball.check_wall_collision()
         ball.check_paddle_collision(player_left, player_right)
+        ball.check_goal(pleft_points, pright_points)
         ball.draw()
 
     display.update()
