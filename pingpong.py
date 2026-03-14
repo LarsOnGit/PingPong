@@ -6,10 +6,13 @@ from random import randint
 
 font.init()
 font1 = font.SysFont("Arial", 80)
-win = font1.render("YOU WIN!", True, (255, 255, 255))
-lose = font1.render("YOU LOSE!", True, (180, 0, 0))
+font2  = font.SysFont("Arial", 30)
+p1_point_int = 0
+p2_point_int = 0
+p1_points = font2.render("Points:" + str(p1_point_int), True, (0, 0, 0))
+p2_points = font2.render("Points:" + str(p2_point_int), True, (0, 0, 0))
 
-font2  = font.SysFont("Arial", 36)
+
 
 class GameSprite(sprite.Sprite):
     def __init__(self, image_path, player_x, player_y, size_x, size_y, speed):
@@ -72,6 +75,12 @@ class Ball(GameSprite):
                 self.speed_x = -self.speed_x
                 hit_pos = (self.rect.centery - paddle_right.rect.centery) / (paddle_right.rect.height / 2)
                 self.speed_y = hit_pos * 8
+    def win_con(self):
+        if self.rect.x < 0:
+            p2_point_int += 1
+        elif self.rect.x > win_width:
+            p1_point_int += 1
+        
 
 win_width = 700
 win_height = 500
@@ -91,6 +100,9 @@ ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 25, 25, 5)
 
 p1_points = font1.render(str(pleft_points), True, (255, 255, 255))
 p2_points = font1.render(str(pright_points), True, (255, 255, 255))
+
+
+
 
 run = True
 FPS = 60
