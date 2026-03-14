@@ -1,5 +1,6 @@
 from pygame import *
 from random import randint
+from time import sleep
 
 
 # Das ist ein Konflikt
@@ -62,6 +63,7 @@ class Ball(GameSprite):
             self.rect.x = win_width // 2
             self.rect.y = win_height // 2
             self.speed_x = -self.speed_x
+            sleep(1)
         
     def check_paddle_collision(self, paddle_left, paddle_right):
         if sprite.collide_rect(self, paddle_left):
