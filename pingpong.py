@@ -6,10 +6,13 @@ from random import randint
 
 font.init()
 font1 = font.SysFont("Arial", 80)
-win = font1.render("YOU WIN!", True, (255, 255, 255))
-lose = font1.render("YOU LOSE!", True, (180, 0, 0))
+font2  = font.SysFont("Arial", 30)
+p1_point_int = 0
+p2_point_int = 0
+p1_points = font2.render("Points:" + str(p1_point_int), True, (0, 0, 0))
+p2_points = font2.render("Points:" + str(p2_point_int), True, (0, 0, 0))
 
-font2  = font.SysFont("Arial", 36)
+
 
 class GameSprite(sprite.Sprite):
     def __init__(self, image_path, player_x, player_y, size_x, size_y, speed):
@@ -62,6 +65,12 @@ class Ball(GameSprite):
                 self.speed_x = -self.speed_x
                 hit_pos = (self.rect.centery - paddle_right.rect.centery) / (paddle_right.rect.height / 2)
                 self.speed_y = hit_pos * 8
+    def win_con(self):
+        if self.rect.x < 0:
+            p2_point_int += 1
+        elif self.rect.x > win_width:
+            p1_point_int += 1
+        
 
 win_width = 700
 win_height = 500
@@ -76,10 +85,9 @@ player_left = Player(50, win_height//2 - 75, K_w, K_s)
 player_right = Player(win_width - 100, win_height//2 - 75, K_UP, K_DOWN)
 ball = Ball("ping_pong_ball.png", win_width//2, win_height//2, 25, 25, 5)   
 
-score = 0
-goal = 10
-lost  = 0
-max_lost = 3
+
+
+
 run = True
 FPS = 60
 clock = time.Clock()
@@ -97,6 +105,9 @@ while run:
         player_left.draw()
         player_right.draw()
 
+
+        window.blit(p1_points, (50, 50))
+        window.blit(p2_points, (win_width - 150, 50))
         ball.update()
         ball.check_wall_collision()
         ball.check_paddle_collision(player_left, player_right)
